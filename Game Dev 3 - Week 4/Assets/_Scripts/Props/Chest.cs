@@ -1,10 +1,11 @@
+using GameDevWithMarco.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameDevWithMarco.EnvironmentalProps
 {
-    public class Chest : MonoBehaviour
+    public class Chest : MonoBehaviour, IInteractable
     {
         Animator anim;
         // Start is called before the first frame update
@@ -13,9 +14,18 @@ namespace GameDevWithMarco.EnvironmentalProps
             anim = GetComponent<Animator>();
         }
 
-        public void OpenTheChest()
+        private void OpenTheChest()
         {            
             anim.SetTrigger("Open");
+      
+        
+        }
+
+
+        public void Interact()
+        {
+            OpenTheChest();
+
         }
     }
 }

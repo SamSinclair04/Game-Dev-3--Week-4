@@ -1,4 +1,5 @@
 using GameDevWithMarco.EnvironmentalProps;
+using GameDevWithMarco.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,24 +33,14 @@ namespace GameDevWithMarco.Player
 
         private void Update()
         {
+
+            //Checks if player is pressing E, then checks if player is colliding with a certain component, if it is, it will fire a method for that specific component
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Torch torch = thingIAmCollidingWith.GetComponent<Torch>();
-                if (torch != null)
+               IInteractable interactableObject = thingIAmCollidingWith.GetComponent<IInteractable>();
+                if (interactableObject != null)
                 {
-                    torch.TurnTorchOnOff();
-                }
-
-                Chest chest = thingIAmCollidingWith.GetComponent<Chest>();
-                if (chest != null)
-                {
-                    chest.OpenTheChest();
-                }
-
-                Elevator elevator = thingIAmCollidingWith.GetComponent<Elevator>();
-                if (elevator != null)
-                {
-                    elevator.StartElevator();
+                    interactableObject.Interact();
                 }
             }
         }
